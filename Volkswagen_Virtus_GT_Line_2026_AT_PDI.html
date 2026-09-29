@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Volkswagen Virtus GT Line 1.0 TSI AT — Complete PDI</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#172033;--muted:#657084;--line:#dfe4ec;--pass:#16794a;--fail:#b42318;--skip:#667085;--accent:#173b78;--critical:#fff0ee;--high:#fff8e4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+header{background:#101827;color:#fff;padding:22px 18px;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px #0002}
+h1{font-size:22px;margin:0 0 5px}.sub{color:#c8d1df;font-size:13px}
+.wrap{max-width:1100px;margin:auto;padding:16px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.toolbar button,.section-actions button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 12px;cursor:pointer;font-weight:600}
+.toolbar button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px}
+.stat b{display:block;font-size:20px}.stat span{color:var(--muted);font-size:12px}
+.progress{height:9px;background:#e5e9f0;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--accent);width:0}
+.section{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden}
+.section-head{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:14px 16px;background:#f9fafc;border-bottom:1px solid var(--line);cursor:pointer}
+.section-head h2{font-size:16px;margin:0}.section-actions{display:flex;gap:6px;align-items:center}.count{font-size:12px;color:var(--muted)}
+.chev{font-size:18px;width:22px;text-align:center}
+.item{padding:11px 14px;border-bottom:1px solid #edf0f4}.item:last-child{border-bottom:0}
+.row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}
+.label{font-weight:500}
+.badge{font-size:10px;padding:2px 6px;border-radius:99px;margin-left:7px;font-weight:700}
+.critical{background:#ffe0dd;color:#9f1d14}.high{background:#ffedb5;color:#8a5b00}
+.controls{display:flex;gap:5px}.controls button{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer}
+.controls button.on.pass{background:#dff6e9;border-color:#79c89f;color:#0e633a}
+.controls button.on.fail{background:#ffe2df;border-color:#e49b94;color:#9f1d14}
+.controls button.on.skip{background:#e9edf3;border-color:#bbc3cf;color:#475467}
+.meta{display:grid;grid-template-columns:190px 1fr;gap:7px;margin-top:7px}
+.meta input,.meta textarea,.failbox textarea{border:1px solid var(--line);border-radius:7px;padding:7px;font:inherit}
+.meta textarea{min-height:34px;resize:vertical}.evidence{font-size:11px;color:var(--muted);margin-top:5px}
+.failbox{display:none;background:#fff7f6;border-top:1px solid #f0c4bf;padding:9px;margin:8px -14px -11px}
+.failbox.show{display:block}.failbox textarea{width:100%;min-height:48px;border-color:#e5b5af;resize:vertical}
+.summary{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+.verdict{font-size:16px;font-weight:700;margin-bottom:5px}.verdict.hold{color:#9f1d14}.verdict.ok{color:#16794a}
+.notice{background:#eef4ff;border:1px solid #cbdaf5;border-radius:10px;padding:11px 13px;margin:12px 0;color:#27436f}
+footer{padding:20px 0 50px;color:var(--muted);font-size:12px}
+@media(max-width:700px){
+.stats{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr}.controls{justify-content:flex-start}.controls button{padding:7px 11px}
+.meta{grid-template-columns:1fr}
+}
+@media print{
+header{position:static;background:#fff;color:#000;box-shadow:none}.toolbar,.section-actions,.controls,.meta input,.meta textarea,.failbox,.notice{display:none!important}
+.section{break-inside:avoid}.section .body{display:block!important}.stats{grid-template-columns:repeat(5,1fr)}body{background:#fff}
+}
+
+/* iPhone 16 Pro / mobile-first PDI enhancements */
+html{background:#f4f6fa;-webkit-text-size-adjust:100%}
+body{padding-bottom:env(safe-area-inset-bottom)}
+button,input,textarea{font:inherit}
+button{-webkit-tap-highlight-color:transparent}
+@media(max-width:700px){
+  body{font-size:15px;overflow-x:hidden}
+  header{
+    position:sticky;top:0;
+    padding:calc(12px + env(safe-area-inset-top)) 14px 12px;
+    z-index:50
+  }
+  header .wrap{padding:0}
+  h1{font-size:18px;line-height:1.18;margin-bottom:4px}
+  .sub{font-size:11px;line-height:1.3}
+
+  main.wrap{padding:10px 10px 28px;max-width:none}
+  .toolbar{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin:8px 0 10px
+  }
+  .toolbar button{
+    min-height:44px;
+    padding:10px 8px;
+    font-size:13px;
+    border-radius:10px
+  }
+  .toolbar button.primary{grid-column:span 2}
+
+  .notice{
+    font-size:12px;
+    line-height:1.4;
+    padding:10px 11px;
+    margin:9px 0
+  }
+
+  .stats{
+    grid-template-columns:repeat(4,1fr);
+    gap:6px;
+    margin:9px 0
+  }
+  .stat{
+    min-width:0;
+    padding:8px 6px;
+    border-radius:9px;
+    text-align:center
+  }
+  .stat:last-child{grid-column:span 4}
+  .stat b{font-size:18px;line-height:1.1}
+  .stat span{font-size:10px;white-space:nowrap}
+
+  .progress{
+    position:sticky;
+    top:calc(65px + env(safe-area-inset-top));
+    z-index:40;
+    height:7px;
+    margin:8px 0 10px;
+    box-shadow:0 1px 5px #0001
+  }
+
+  .section{
+    margin:9px 0;
+    border-radius:12px;
+    box-shadow:0 1px 2px #00000008
+  }
+  .section-head{
+    min-height:52px;
+    padding:11px 11px;
+    position:sticky;
+    top:calc(72px + env(safe-area-inset-top));
+    z-index:10
+  }
+  .section-head h2{
+    font-size:14px;
+    line-height:1.2;
+    max-width:55%
+  }
+  .section-actions{gap:5px}
+  .section-actions .count{font-size:10px;white-space:nowrap}
+  .section-actions button{
+    min-width:60px;
+    min-height:36px;
+    padding:6px 7px;
+    font-size:11px
+  }
+  .chev{font-size:16px}
+
+  .item{
+    padding:12px 11px 13px;
+    background:#fff
+  }
+  .row{
+    display:flex;
+    flex-direction:column;
+    gap:9px
+  }
+  .label{
+    font-size:14px;
+    line-height:1.35;
+    padding-right:2px
+  }
+  .badge{
+    font-size:9px;
+    padding:2px 5px;
+    vertical-align:2px
+  }
+
+  .controls{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+    width:100%
+  }
+  .controls button{
+    min-height:43px;
+    padding:9px 5px;
+    font-size:12px;
+    font-weight:700;
+    border-radius:9px
+  }
+  .controls button:active{transform:scale(.98)}
+
+  .meta{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    margin-top:9px
+  }
+  .meta input,.meta textarea{
+    width:100%;
+    min-height:42px;
+    font-size:13px;
+    padding:9px 10px;
+    border-radius:9px
+  }
+  .meta textarea{min-height:52px}
+
+  .evidence{
+    font-size:10px;
+    line-height:1.35;
+    margin-top:7px
+  }
+  .failbox{
+    margin:9px -11px -13px;
+    padding:9px 11px
+  }
+  .failbox textarea{
+    min-height:72px;
+    font-size:13px
+  }
+
+  .summary{
+    margin:10px 0;
+    padding:12px;
+    border-radius:11px
+  }
+  .verdict{font-size:14px;line-height:1.3}
+  #verdictDetail{font-size:12px;line-height:1.35}
+
+  footer{font-size:10px;padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+}
+
+/* Very narrow screens */
+@media(max-width:380px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:last-child{grid-column:span 2}
+  .section-head h2{max-width:50%}
+}
+
+/* Landscape phone */
+@media(max-width:700px) and (orientation:landscape){
+  header{padding-top:8px;padding-bottom:8px}
+  h1{font-size:16px}
+  .toolbar{grid-template-columns:repeat(4,1fr)}
+  .toolbar button.primary{grid-column:auto}
+  .section-head{position:sticky;top:48px}
+  .progress{top:48px}
+}
+
+
+#mobileBar{display:none}
+@media(max-width:700px){
+  #mobileBar{
+    display:flex;
+    position:fixed;
+    left:10px;right:10px;
+    bottom:calc(8px + env(safe-area-inset-bottom));
+    z-index:100;
+    min-height:50px;
+    align-items:center;
+    gap:7px;
+    padding:7px 8px;
+    background:#101827;
+    color:#fff;
+    border-radius:13px;
+    box-shadow:0 5px 24px #0004
+  }
+  #mobileBar>div{flex:1;font-size:11px;padding-left:5px}
+  #mobileBar b{font-size:15px}
+  #mobileBar button{
+    min-height:36px;
+    padding:7px 10px;
+    border:0;
+    border-radius:8px;
+    background:#fff;
+    color:#172033;
+    font-weight:700;
+    font-size:11px
+  }
+  footer{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+}
+
+
+.vin-decoder{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+.vin-decoder h3{margin:0 0 5px;font-size:16px}
+.vin-help{font-size:12px;color:var(--muted);margin-bottom:10px}
+.vin-row{display:flex;gap:8px;align-items:stretch}
+.vin-row input{flex:1;min-width:0;border:1px solid var(--line);border-radius:9px;padding:11px 12px;font-size:16px;text-transform:uppercase;letter-spacing:1px}
+.vin-row button{border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:9px;padding:10px 14px;font-weight:700;cursor:pointer}
+.vin-result{display:none;margin-top:10px;border-radius:9px;padding:11px 12px;background:#f6f8fb}
+.vin-result.show{display:block}
+.vin-result.ok{background:#edf9f2;border:1px solid #b9dfc8}
+.vin-result.warn{background:#fff8e6;border:1px solid #ead59a}
+.vin-result.error{background:#fff1f0;border:1px solid #efc1bb}
+.vin-date{font-size:20px;font-weight:800;margin:2px 0 5px}
+.vin-detail{font-size:12px;color:#4b5565}
+.vin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px}
+.vin-char{background:#fff;border:1px solid var(--line);border-radius:7px;padding:6px;text-align:center}
+.vin-char b{display:block;font-size:14px}.vin-char span{font-size:9px;color:var(--muted)}
+@media(max-width:700px){
+  .vin-decoder{padding:11px;margin:9px 0}
+  .vin-row{flex-direction:column}
+  .vin-row button{min-height:44px}
+  .vin-result{font-size:13px}
+  .vin-date{font-size:18px}
+  .vin-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+
+.age-card{margin-top:10px;padding:11px 12px;border-radius:9px;border:1px solid var(--line);background:#fff}
+.age-card .age-main{font-size:18px;font-weight:800;margin-bottom:3px}
+.age-card .age-detail{font-size:12px;color:var(--muted);line-height:1.4}
+.age-card.fresh{background:#edf9f2;border-color:#b9dfc8}
+.age-card.attention{background:#fff8e6;border-color:#ead59a}
+.age-card.old{background:#fff1f0;border-color:#efc1bb}
+.age-input{margin-top:8px;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.age-input label{font-size:12px;font-weight:700}
+.age-input input{border:1px solid var(--line);border-radius:7px;padding:7px 9px;font-size:14px}
+@media(max-width:700px){
+ .age-card .age-main{font-size:16px}
+ .age-input{display:grid;grid-template-columns:1fr}
+ .age-input input{width:100%;min-height:42px;font-size:16px}
+}
+
+</style>
+</head>
+<body>
+<header><div class="wrap" style="padding:0">
+<h1>Volkswagen Virtus GT Line 1.0 TSI AT — Complete PDI</h1>
+<div class="sub">6-speed automatic • 524 checkpoints • Pass / Fail / Skip • evidence & notes • autosaves locally</div>
+</div></header>
+
+<main class="wrap">
+<div class="toolbar">
+<button class="primary" onclick="window.print()">Print / Save PDF</button>
+<button onclick="setAll('pass')">Mark remaining PASS</button>
+<button onclick="expandAll()">Expand all</button>
+<button onclick="collapseAll()">Collapse all</button>
+<button onclick="resetAll()">Reset</button>
+<button onclick="exportCSV()">Export CSV</button>
+</div>
+
+
+<div class="vin-decoder">
+  <h3>🔎 VIN Manufacturing-Date Decoder</h3>
+  <div class="vin-help">
+    Enter the 17-character VIN from the actual car. For the India-built Volkswagen VIN pattern used by the Virtus,
+    the decoder reads character 4 for production month and characters 5–6 for production year.
+    It also displays character 10 separately as the model-year code.
+  </div>
+  <div class="vin-row">
+    <input id="vinInput" maxlength="17" autocomplete="off" autocapitalize="characters"
+           placeholder="Enter 17-character VIN">
+    <button onclick="decodeVIN()">Decode VIN</button>
+  </div>
+  <div id="vinResult" class="vin-result"></div>
+</div>
+
+<div class="notice"><b>Recommended time:</b> allow approximately <b>90–120 minutes</b> for a thorough PDI, including a 15–20 minute road test. Do the identity/body checks before final acceptance wherever possible.</div>
+
+<div class="stats">
+<div class="stat"><b id="total">0</b><span>Total checks</span></div>
+<div class="stat"><b id="done">0</b><span>Completed</span></div>
+<div class="stat"><b id="passed">0</b><span>Pass</span></div>
+<div class="stat"><b id="failed">0</b><span>Fail</span></div>
+<div class="stat"><b id="critical">0</b><span>Critical fails</span></div>
+</div>
+<div class="progress"><i id="bar"></i></div>
+
+<div id="app"></div>
+
+<div class="summary">
+<div id="verdict" class="verdict">PDI not yet started</div>
+<div id="verdictDetail" style="color:#657084"></div>
+</div>
+
+<div class="source notice"><b>Model basis:</b> Volkswagen India lists the Virtus GT Line 1.0 TSI AT with a 999 cc 1.0 TSI, 115 PS/178 Nm, 6-speed automatic, paddle shifters, cruise control, darkened LED lighting, 20.32 cm digital cockpit, 25.65 cm VW Play, wireless App-Connect, KESSY, electric sunroof, six airbags, rear parking sensors and reversing camera. Treat the VIN-specific owner's manual and delivered-car specification as the final authority for equipment.</div>
+
+
+<div id="mobileBar" aria-label="PDI progress">
+  <div><b id="mobileProgress">0%</b><span> checked</span></div>
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+  <button onclick="scrollToNextIncomplete()">Next</button>
+</div>
+
+<footer>Designed for a thorough pre-delivery inspection. A PDI is not a substitute for a qualified technician's mechanical inspection. Do not perform unsafe tests on public roads.</footer>
+</main>
+
+<script>
+const sections = [["01. Identity, paperwork & delivery gate", ["VIN/chassis number matches invoice/order form", "VIN matches insurance proposal/policy", "VIN matches registration/application documents (if already generated)", "Engine number matches documents", "Variant explicitly says Virtus GT Line 1.0 TSI AT", "Transmission is confirmed as 6-speed automatic", "Exterior colour matches booking/invoice", "Interior specification/trim matches booking", "Manufacturing month/year recorded", "Dealer arrival date recorded", "Vehicle has not been previously registered", "Vehicle has not been used as a demo/test-drive car", "Dealer confirms whether any repair/repaint has occurred", "Dealer confirms whether any pre-delivery service/repair was performed", "Odometer reading photographed and recorded", "Fuel level recorded", "Open campaign/recall/service action check requested for VIN", "Delivery is being inspected before final acceptance/registration where possible", "All promised discounts/accessories/packages appear on paperwork", "Insurance IDV, policy details and nominee details checked", "Extended warranty/service package/RSA documents checked", "Temporary/permanent registration details checked"]], ["02. GT Line specification verification", ["1.0 TSI engine confirmed", "999 cc engine confirmed against documents/specification", "115 PS specification confirmed", "178 Nm specification confirmed", "6-speed automatic transmission confirmed", "GT Line exterior treatment present", "Glossy-black front wing/signature treatment present as specified", "Darkened full LED headlamps present", "LED DRLs present", "LED turn indicators present", "Darkened LED tail lamps present", "Premium black interior present", "20.32 cm digital cockpit present", "25.65 cm VW Play touchscreen present", "8-speaker audio system present", "Wireless Apple CarPlay/App-Connect available", "Wireless Android Auto/App-Connect available", "KESSY push-button start/stop present", "Electric sunroof present", "Paddle shifters present", "Cruise control present", "Rear parking sensors present", "Reversing camera present", "Hill-start assist available and verified", "6 airbags confirmed", "Rain-sensing wipers present", "Auto headlights present", "Auto-dimming IRVM present", "Engine idle start/stop present"]], ["03. Exterior body & paint — front", ["Bonnet paint uniform", "Bonnet has no dents", "Bonnet has no chips/scratches", "Bonnet alignment and gaps look consistent", "Front bumper has no scratches/cracks", "Front grille is undamaged", "Glossy-black GT Line front trim is undamaged", "VW emblem is undamaged", "Left headlamp lens is clear and undamaged", "Right headlamp lens is clear and undamaged", "Left DRL works", "Right DRL works", "Left front indicator works", "Right front indicator works", "No overspray visible around front panels", "No polishing/buffing holograms visible", "No transport-film residue or adhesive marks"]], ["04. Exterior body & paint — left side", ["Left front fender paint uniform", "Left front fender has no dent", "Left front door paint uniform", "Left front door has no dent/scratch", "Left rear door paint uniform", "Left rear door has no dent/scratch", "Left quarter panel paint uniform", "Left quarter panel has no dent/scratch", "All left-side panel gaps appear consistent", "Left front door opens/closes smoothly", "Left rear door opens/closes smoothly", "Left door handles undamaged", "Left ORVM housing undamaged", "Left ORVM glass undamaged", "Left ORVM turn indicator works", "Left GT Line badging correct/undamaged", "Left window glass has no chips/scratches", "Left window trim has no scratches"]], ["05. Exterior body & paint — right side", ["Right front fender paint uniform", "Right front fender has no dent", "Right front door paint uniform", "Right front door has no dent/scratch", "Right rear door paint uniform", "Right rear door has no dent/scratch", "Right quarter panel paint uniform", "Right quarter panel has no dent/scratch", "All right-side panel gaps appear consistent", "Right front door opens/closes smoothly", "Right rear door opens/closes smoothly", "Right door handles undamaged", "Right ORVM housing undamaged", "Right ORVM glass undamaged", "Right ORVM turn indicator works", "Right GT Line badging correct/undamaged", "Right window glass has no chips/scratches", "Right window trim has no scratches"]], ["06. Exterior body & paint — rear & roof", ["Boot lid paint uniform", "Boot lid has no dent/scratch", "VIRTUS/GT Line rear badging is correct and undamaged", "Rear bumper has no scratches/cracks", "Rear bumper alignment is correct", "Left tail lamp undamaged", "Right tail lamp undamaged", "High-mounted stop lamp undamaged", "Rear reflectors intact", "Rear parking sensors seated correctly", "Rear number-plate area undamaged", "Roof has no dents", "Roof has no scratches", "Roof/sunroof perimeter trim undamaged", "All visible panel gaps are consistent", "No evidence of repainting/mismatch under suitable light"]], ["07. Wheels & tyres", ["Left-front tyre size is correct for GT Line", "Right-front tyre size is correct for GT Line", "Left-rear tyre size is correct for GT Line", "Right-rear tyre size is correct for GT Line", "All four tyres are free of cuts", "All four tyres are free of bulges", "All four tyres have no sidewall cracking", "All four tyres show no abnormal/uneven wear", "Tyre brand/model recorded for all four tyres", "Tyre manufacturing date/week recorded", "Wheel/rim design is correct", "LF alloy has no scratches/dents", "RF alloy has no scratches/dents", "LR alloy has no scratches/dents", "RR alloy has no scratches/dents", "Wheel weights appear secure", "Valve stems intact", "Cold tyre pressures measured with a gauge", "Tyre pressures adjusted to the vehicle's specified cold pressure", "Spare wheel/tyre present as supplied", "Spare tyre condition checked", "Jack present", "Wheel wrench/tools present", "Towing equipment/tooling present as supplied"]], ["08. Underbody & engine bay", ["No visible oil leak", "No visible coolant leak", "No visible brake-fluid leak", "No visible fuel leak", "No damaged underbody cover", "No hanging wiring/connectors", "No obvious impact marks underneath", "No damaged exhaust components", "No obvious suspension damage", "Engine bay is free of abnormal residue", "Battery is securely mounted", "Battery terminals/connections appear secure", "Coolant level is appropriate", "Brake-fluid level is appropriate", "Washer fluid is present", "Engine oil level is appropriate", "Oil filler/cap area is clean", "No obvious loose hoses", "No obvious loose clamps/connectors", "Engine-bay VIN/labels are intact", "Applicable engine-oil specification verified from vehicle/manual"]], ["09. Cold start & engine", ["Dealer allowed cold-start inspection where practical", "Engine starts promptly", "No prolonged cranking", "No abnormal starter noise", "No persistent warning lights after start", "No EPC warning", "No check-engine warning", "No abnormal knocking", "No abnormal ticking", "No abnormal belt/accessory noise", "No excessive vibration at idle", "Idle settles normally", "No abnormal smoke", "No abnormal exhaust smell", "No visible fluid leak after startup", "Engine reaches operating temperature normally", "Stop/start function operates when conditions permit", "Warm restart is normal", "No warning lights after warm restart"]], ["10. Digital cockpit & controls", ["Digital cockpit boots normally", "No dead pixels", "No flickering", "No abnormal screen artefacts", "Speed display works", "RPM display works", "Fuel level display works", "Trip computer works", "Outside-temperature display works", "Warning-light self-test occurs normally", "No unexplained warning remains after startup", "Steering-wheel audio controls work", "Steering-wheel call controls work", "Instrument/menu controls work", "Steering wheel is free from cosmetic damage", "Horn works"]], ["11. VW Play infotainment", ["Screen boots normally", "Screen has no scratches/cracks", "No dead pixels", "Touch works across screen", "No ghost touches", "No abnormal lag/freezing", "Physical/steering volume controls work", "Bluetooth pairing works", "Bluetooth music playback works", "Bluetooth calls work", "Infotainment microphone works", "Wireless Apple CarPlay connects", "Wireless Apple CarPlay remains stable", "Apple CarPlay maps/navigation works", "Apple CarPlay calls work", "Apple CarPlay audio works", "Wireless Android Auto connects", "Wireless Android Auto remains stable", "Android Auto maps/navigation works", "Android Auto calls work", "Android Auto audio works", "Infotainment software/version recorded", "Vehicle/phone permissions configured correctly", "Radio/audio source switching works", "All eight speakers produce sound", "Front-left speaker works", "Front-right speaker works", "Rear-left speaker works", "Rear-right speaker works", "No speaker rattle/distortion/buzz"]], ["12. Connectivity, USB & charging", ["Front USB-C data/charging port works", "Second front USB-C port works", "Rear USB-C charging ports work", "Phone charges through USB", "Wireless phone charging works if equipped", "12V socket works if equipped", "USB connections do not disconnect unexpectedly", "Phone projection reconnects after vehicle restart"]], ["13. Climate control & ventilation", ["AC produces cold air", "Fan speed 1 works", "Fan speed 2 works", "Fan speed 3 works", "Maximum fan speed works", "Temperature adjustment works", "Airflow mode selection works", "Front vents work", "Rear AC vents work", "Recirculation works", "Defog/defrost works", "No abnormal blower noise", "No bad/musty smell", "Climate display/touch controls work", "AC remains functional after restart"]], ["14. KESSY, keys, locks & windows", ["Primary key locks vehicle", "Primary key unlocks vehicle", "Primary key enables KESSY entry", "Primary key enables push-button start", "Primary key enables boot access", "Spare key locks vehicle", "Spare key unlocks vehicle", "Spare key enables KESSY entry", "Spare key enables push-button start", "Spare key enables boot access", "Driver door locks/unlocks correctly", "Passenger door locks/unlocks correctly", "Rear-left door locks/unlocks correctly", "Rear-right door locks/unlocks correctly", "Repeated lock/unlock test completed at least three cycles", "Driver window operates", "Passenger window operates", "Rear-left window operates", "Rear-right window operates", "Driver one-touch window works", "Driver pinch protection works", "Window motors make no abnormal noise", "Electric mirror adjustment works left", "Electric mirror adjustment works right", "Electric folding mirrors work", "Mirror heating works if equipped", "ORVM indicators work"]], ["15. Sunroof & interior lights", ["Sunroof opens smoothly", "Sunroof closes smoothly", "Sunroof glass has no scratches", "Sunroof has no cracks", "Sunroof motor makes no abnormal noise", "Sunroof does not hesitate/stall", "Sunroof anti-pinch operates correctly", "Sunshade opens smoothly", "Sunshade closes smoothly", "Sunroof seal is continuous and undamaged", "No visible water marks/infiltration", "Front cabin lights work", "Rear cabin lights work", "Boot light works", "Illumination switches work", "No loose/rattling roof trim"]], ["16. Interior trim & front cabin", ["Dashboard is free from scratches", "Dashboard trim is properly fitted", "Glossy-black trim is free from scratches", "No loose interior panels", "No obvious rattles when panels are gently checked", "Centre console is clean", "Glovebox opens/closes correctly", "Glovebox trim is undamaged", "Door trims are clean", "Door pockets are clean", "Floor carpets are clean", "Floor mats are present if promised", "Pedals are clean/undamaged", "Gear selector is undamaged", "Parking-brake/hold controls operate as applicable", "12V/USB areas are clean", "Interior has no stains", "No strong chemical/fuel/burning smell"]], ["17. Seats & rear cabin", ["Driver seat upholstery has no stains", "Driver seat has no cuts/tears", "Driver seat stitching is intact", "Driver seat slide works", "Driver seat recline works", "Driver seat height adjustment works", "Driver headrest adjusts", "Passenger seat upholstery is clean", "Passenger seat adjustments work", "Passenger headrest adjusts", "Rear seat upholstery is clean", "Rear seat has no cuts/tears", "Rear seat stitching is intact", "Rear headrests are present", "Rear seat split-fold mechanism works", "Rear seatbacks latch securely", "Rear armrest works if equipped", "Rear floor/carpet is clean"]], ["18. Seat belts, airbags & child restraint", ["Driver seat belt latches", "Driver seat belt retracts", "Front passenger belt latches", "Front passenger belt retracts", "Rear-left belt latches/retracts", "Rear-middle belt latches/retracts", "Rear-right belt latches/retracts", "No belt webbing is frayed/twisted", "Front seat-belt warning operates normally", "Rear seat-belt reminders operate as applicable", "Airbag warning performs normal self-test", "Airbag/SRS warning does not remain illuminated", "No restraint-system warning remains", "ISOFIX anchors are present", "Child locks operate on both rear doors", "Airbag labels/markings are present as expected"]], ["19. Lights, wipers & visibility", ["Low beam left works", "Low beam right works", "High beam left works", "High beam right works", "DRLs work", "Front indicators work left", "Front indicators work right", "Hazard lights work", "Rear tail lamps work", "Brake lamps work", "Rear indicators work left", "Rear indicators work right", "Reverse lamps work", "Rear fog lamp works where fitted", "Number-plate illumination works", "Auto-headlight mode works", "Coming-home function works", "Leaving-home function works", "Rain-sensing wiper mode responds", "Front washer works", "Front wiper intermittent/auto works", "Front wiper low speed works", "Front wiper high speed works", "Wiper blades are undamaged", "Washer jets are correctly aimed", "Rear defogger works", "Auto-dimming IRVM works"]], ["20. ADAS/safety & parking systems", ["ABS warning self-test is normal", "ESC warning self-test is normal", "Traction/stability warning behaviour is normal", "Tyre-pressure/deflation warning system is checked", "Hill-start assist operates/engages as appropriate", "Rear parking sensors activate", "Each rear sensor responds", "Sensor tones change with distance", "Reversing camera activates immediately", "Camera image is clear", "Camera has no flicker/black screen", "Static guidelines display", "Camera image orientation is correct", "Reverse image remains stable", "Seat-belt reminders work", "Speed-warning/vehicle warning functions behave normally", "No unexplained safety-system warning remains"]], ["21. Boot & luggage area", ["Boot opens from all applicable controls", "Boot latch works", "Boot closes smoothly", "No excessive force required", "Boot carpet is clean", "No water marks/moisture", "Boot illumination works", "Tool kit is complete", "Spare wheel/tyre is secure", "Jack is secure", "Wheel wrench is present", "Rear seat release operates", "Rear seatbacks lock after folding", "No loose items/rattles in boot", "Emergency/towing equipment supplied with vehicle is present"]], ["22. Automatic transmission — 6-speed AT", ["Transmission identified as 6-speed automatic", "P position engages correctly", "R position engages correctly", "N position engages correctly", "D position engages correctly", "Selector movement is smooth", "Reverse engagement is not excessively delayed", "Drive engagement is not excessively delayed", "No harsh engagement", "No abnormal transmission noise", "No transmission warning", "Low-speed crawling is smooth", "Light acceleration is smooth", "Moderate acceleration is smooth", "Upshifts occur normally", "Downshifts occur normally", "Kickdown operates normally", "Manual/paddle mode activates", "Left paddle downshift works", "Right paddle upshift works", "Paddle commands are displayed correctly if applicable", "Return to normal D operation works", "Auto start/stop does not cause abnormal restart behaviour", "Stop-and-go behaviour is smooth", "Parking manoeuvre forward/reverse is smooth"]], ["23. Cruise control & driver controls", ["Cruise control switches on", "Cruise speed can be set", "Set speed can be increased", "Set speed can be decreased", "Cruise can be cancelled", "Cruise can be resumed", "Brake cancels cruise as expected", "Steering-wheel controls remain responsive during use", "No cruise-control warning/fault appears"]], ["24. Road test — engine, steering, suspension & brakes", ["Engine acceleration is smooth", "No hesitation under light acceleration", "No hesitation under moderate acceleration", "No abnormal engine vibration", "Steering wheel is centred on a straight road", "Vehicle tracks straight", "No steering pull", "No steering vibration", "No unusual suspension knock", "No unusual suspension squeak", "No excessive body movement", "No abnormal tyre noise", "Brake pedal feels consistent", "Vehicle brakes straight", "No abnormal brake vibration", "No abnormal brake noise", "No warning lights appear during drive", "No abnormal smell after drive", "No fluid leak visible after drive", "No unusual heat/smoke after drive"]], ["25. Post-drive inspection", ["Engine bay rechecked after road test", "No new oil leak", "No new coolant leak", "No new fluid leak", "Transmission area shows no leak", "Tyres remain normal", "No new wheel damage", "No warning lights after parking", "Warm restart completed successfully", "AC remains functional after drive", "Infotainment remains functional after drive", "Parking sensors/camera remain functional"]], ["26. Diagnostic / OBD check", ["Vehicle diagnostic scan performed if equipment is available", "Engine ECU checked", "Transmission ECU checked", "ABS/ESC module checked", "Airbag/SRS module checked", "Body-control/electrical modules checked where scanner permits", "No active fault codes", "No pending fault codes requiring explanation", "Any stored historical codes have been explained/documented", "Diagnostic scan screenshot/report saved"]], ["27. Accessories, documents & handover", ["Both vehicle keys handed over", "Owner's manual handed over", "Warranty documentation handed over", "Service schedule/documentation handed over", "RSA documentation handed over if purchased", "Extended warranty documentation handed over if purchased", "Service package documentation handed over if purchased", "Insurance policy/certificate received", "Registration documentation received/confirmed", "Number plates/temporary plates handled correctly", "Floor mats present if promised", "Boot mat present if promised", "Mud flaps present if promised", "Dashcam/accessories installed if purchased", "All paid accessories are present", "Accessory fitment has no damage", "Dealer demonstrates basic vehicle controls", "Dealer demonstrates KESSY", "Dealer demonstrates infotainment", "Dealer demonstrates CarPlay/Android Auto", "Dealer demonstrates sunroof", "Dealer demonstrates tyre/roadside procedure", "Final odometer photographed", "Final VIN photographed", "Final fuel level photographed"]], ["28. Final acceptance & issue closure", ["All FAIL items have a documented resolution", "All safety-critical FAIL items are resolved before acceptance", "Any cosmetic issue is photographed", "Any agreed repair has a written job card/commitment", "Any promised accessory still pending has written delivery date", "VIN on final documents rechecked", "Engine number on final documents rechecked", "Variant on final documents rechecked", "Colour on final documents rechecked", "Odometer on final handover document checked", "Insurance details rechecked", "Registration details rechecked", "Final payment/receipt checked", "Dealer contact details recorded", "Service centre details recorded", "Final acceptance decision recorded"]]];
+const sev = {"VIN/chassis number matches invoice/order form": "CRITICAL", "Engine number matches documents": "CRITICAL", "Variant explicitly says Virtus GT Line 1.0 TSI AT": "CRITICAL", "Transmission is confirmed as 6-speed automatic": "CRITICAL", "Vehicle has not been previously registered": "CRITICAL", "Vehicle has not been used as a demo/test-drive car": "HIGH", "Dealer confirms whether any repair/repaint has occurred": "HIGH", "No visible oil leak": "CRITICAL", "No visible coolant leak": "CRITICAL", "No EPC warning": "CRITICAL", "No check-engine warning": "CRITICAL", "Airbag/SRS warning does not remain illuminated": "CRITICAL", "No restraint-system warning remains": "CRITICAL", "No transmission warning": "CRITICAL", "No active fault codes": "HIGH", "No pending fault codes requiring explanation": "HIGH", "Brake pedal feels consistent": "CRITICAL", "Vehicle brakes straight": "CRITICAL", "Steering wheel is centred on a straight road": "HIGH", "All four tyres are free of bulges": "HIGH", "Both vehicle keys handed over": "HIGH", "All safety-critical FAIL items are resolved before acceptance": "CRITICAL"};
+const STORAGE_KEY = 'virtusPDI2026_fixed';
+const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+const app = document.getElementById('app');
+
+let id = 0;
+const keys = [];
+
+function makeKey(){ return 'i' + (id++); }
+function esc(x){
+  return String(x ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;')
+    .replaceAll('>','&gt;').replaceAll('"','&quot;');
+}
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); update(); }
+function statusFor(k){ return state[k] && state[k].status ? state[k].status : ''; }
+
+function render(){
+  app.innerHTML = '';
+  id = 0; keys.length = 0;
+
+  sections.forEach((s, si) => {
+    const sec = document.createElement('section');
+    sec.className = 'section';
+    const body = document.createElement('div');
+    body.className = 'body';
+
+    const head = document.createElement('div');
+    head.className = 'section-head';
+
+    const title = document.createElement('h2');
+    title.textContent = s[0];
+
+    const right = document.createElement('div');
+    right.className = 'section-actions';
+    const count = document.createElement('span');
+    count.className = 'count';
+    const toggle = document.createElement('button');
+    toggle.textContent = 'Collapse';
+    const chev = document.createElement('span');
+    chev.className = 'chev';
+    chev.textContent = '⌃';
+
+    right.appendChild(count); right.appendChild(toggle); right.appendChild(chev);
+    head.appendChild(title); head.appendChild(right);
+
+    const toggleSection = () => {
+      const hidden = body.style.display === 'none';
+      body.style.display = hidden ? 'block' : 'none';
+      toggle.textContent = hidden ? 'Collapse' : 'Expand';
+      chev.textContent = hidden ? '⌃' : '⌄';
+    };
+    head.onclick = (e) => {
+      if(e.target.tagName === 'BUTTON') return;
+      toggleSection();
+    };
+    toggle.onclick = toggleSection;
+
+    s[1].forEach((label) => {
+      const k = makeKey();
+      keys.push(k);
+      const v = state[k] || {};
+      const severity = sev[label] || 'NORMAL';
+
+      const item = document.createElement('div');
+      item.className = 'item';
+      item.dataset.k = k;
+
+      const badge = severity === 'CRITICAL'
+        ? '<span class="badge critical">CRITICAL</span>'
+        : severity === 'HIGH'
+        ? '<span class="badge high">HIGH</span>' : '';
+
+      item.innerHTML =
+        '<div class="row"><div class="label">'+esc(label)+badge+'</div>'+
+        '<div class="controls">'+
+        '<button data-v="pass" class="'+(v.status==='pass'?'on pass':'')+'">PASS</button>'+
+        '<button data-v="fail" class="'+(v.status==='fail'?'on fail':'')+'">FAIL</button>'+
+        '<button data-v="skip" class="'+(v.status==='skip'?'on skip':'')+'">SKIP</button>'+
+        '</div></div>'+
+        '<div class="meta">'+
+        '<input placeholder="Photo/evidence ref" value="'+esc(v.evidence||'')+'">'+
+        '<textarea placeholder="Notes / dealer response">'+esc(v.notes||'')+'</textarea>'+
+        '</div>'+
+        '<div class="evidence">If FAIL: photograph/video the defect and record the dealer response. Critical/high items should not be accepted unresolved.</div>'+
+        '<div class="failbox '+(v.status==='fail'?'show':'')+'"><textarea placeholder="FAIL detail / corrective action / job-card number">'+esc(v.faildetail||'')+'</textarea></div>';
+
+      body.appendChild(item);
+
+      item.querySelectorAll('.controls button').forEach(btn => {
+        btn.onclick = () => {
+          state[k] = state[k] || {};
+          state[k].status = btn.dataset.v;
+          save(); render();
+          // restore section visibility after rerender
+          if(si >= 0) {
+            const rendered = document.querySelectorAll('.section')[si];
+            if(rendered) {
+              rendered.querySelector('.body').style.display = 'block';
+            }
+          }
+        };
+      });
+
+      const inputs = item.querySelectorAll('input,textarea');
+      inputs[0].oninput = e => { state[k]=state[k]||{}; state[k].evidence=e.target.value; save(); };
+      inputs[1].oninput = e => { state[k]=state[k]||{}; state[k].notes=e.target.value; save(); };
+      inputs[2].oninput = e => { state[k]=state[k]||{}; state[k].faildetail=e.target.value; save(); };
+    });
+
+    sec.appendChild(head); sec.appendChild(body); app.appendChild(sec);
+  });
+
+  update();
+}
+
+
+
+const VIN_MONTHS = {
+  A:'January', B:'February', C:'March', D:'April', E:'May', F:'June',
+  G:'July', H:'August', J:'September', K:'October', L:'November', M:'December'
+};
+
+const VIN_MODEL_YEARS = {
+  A:2010,B:2011,C:2012,D:2013,E:2014,F:2015,G:2016,H:2017,
+  J:2018,K:2019,L:2020,M:2021,N:2022,P:2023,R:2024,S:2025,
+  T:2026,V:2027,W:2028,X:2029,Y:2030
+};
+
+function decodeVIN(){
+  const input=document.getElementById('vinInput');
+  const result=document.getElementById('vinResult');
+  const vin=(input.value||'').trim().toUpperCase().replace(/[\s-]/g,'');
+
+  result.className='vin-result';
+
+  if(vin.length!==17){
+    result.classList.add('show','error');
+    result.innerHTML='<b>Invalid VIN length.</b><div class="vin-detail">Enter exactly 17 characters from the vehicle VIN.</div>';
+    return;
+  }
+
+  if(!/^[A-HJ-NPR-Z0-9]{17}$/.test(vin)){
+    result.classList.add('show','error');
+    result.innerHTML='<b>Invalid VIN characters.</b><div class="vin-detail">VINs do not use I, O or Q. Check the VIN against the vehicle.</div>';
+    return;
+  }
+
+  // India-built VW pattern used for the Virtus:
+  // character 4 = production month code; characters 5-6 = production year.
+  const monthCode=vin[3];
+  const productionYearCode=vin.slice(4,6);
+  const modelYearCode=vin[9];
+
+  const month=VIN_MONTHS[monthCode];
+  const productionYear=/^\d{2}$/.test(productionYearCode)
+    ? 2000 + Number(productionYearCode)
+    : null;
+  const modelYear=VIN_MODEL_YEARS[modelYearCode] || null;
+
+  if(!month || !productionYear){
+    result.classList.add('show','warn');
+    result.innerHTML=
+      '<b>VIN entered, but the India-VW production-date pattern could not be decoded.</b>'+
+      '<div class="vin-detail">Month code: '+esc(monthCode)+
+      ' • production-year code: '+esc(productionYearCode)+
+      '. Do not treat the result as verified; confirm the manufacturing date from the vehicle type/production documentation.</div>';
+    return;
+  }
+
+  let extra='';
+  if(modelYear){
+    extra='<div class="vin-detail"><b>Model year:</b> '+modelYear+
+      ' (VIN character 10 = '+esc(modelYearCode)+'). Model year is not necessarily the same as production year.</div>';
+  }
+
+  const productionDate = new Date(productionYear, Object.keys(VIN_MONTHS).indexOf(monthCode), 1);
+  const today = new Date();
+  const deliveryInput = document.getElementById('deliveryDate');
+  const deliveryDate = deliveryInput && deliveryInput.value
+    ? new Date(deliveryInput.value+'T00:00:00') : today;
+
+  let monthsAge = (deliveryDate.getFullYear()-productionDate.getFullYear())*12 +
+                  (deliveryDate.getMonth()-productionDate.getMonth());
+  if(deliveryDate.getDate() < productionDate.getDate()) monthsAge--;
+  if(monthsAge < 0) monthsAge = 0;
+
+  const ageMs = Math.max(0, deliveryDate.getTime()-productionDate.getTime());
+  const ageDays = Math.floor(ageMs / 86400000);
+  const ageYears = Math.floor(ageDays/365.2425);
+  const remainingDaysAfterYears = Math.floor(ageDays - ageYears*365.2425);
+  const ageMonthsApprox = Math.floor(remainingDaysAfterYears/30.4375);
+
+  let ageText = ageYears > 0
+    ? ageYears+' year'+(ageYears!==1?'s':'')+(ageMonthsApprox?' '+ageMonthsApprox+' month'+(ageMonthsApprox!==1?'s':''):'')
+    : (ageMonthsApprox+' month'+(ageMonthsApprox!==1?'s':'')+' old');
+
+  // Month-level VIN data cannot establish an exact production day.
+  // Therefore, the precise day count is intentionally labelled approximate.
+  let ageClass='fresh';
+  let ageNote='';
+  if(monthsAge <= 3){
+    ageClass='fresh';
+    ageNote='Manufactured within the last ~3 months. Still verify storage, battery and tyre condition.';
+  } else if(monthsAge <= 6){
+    ageClass='attention';
+    ageNote='The car has been in production-stock for several months. Ask for stockyard/storage history and check battery and tyres carefully.';
+  } else if(monthsAge <= 12){
+    ageClass='attention';
+    ageNote='The car is more than 6 months from the production month. Ask for storage history, battery maintenance/charging and tyre condition.';
+  } else {
+    ageClass='old';
+    ageNote='The car is more than 12 months from the production month. Treat this as a significant stock-age item and document the dealer explanation and condition carefully.';
+  }
+
+  const deliveryText = deliveryInput && deliveryInput.value
+    ? 'Delivery date used: '+deliveryInput.value
+    : 'Using today as the delivery date: '+today.toLocaleDateString();
+
+  result.classList.add('show','ok');
+  result.innerHTML=
+    '<div class="vin-date">'+month+' '+productionYear+'</div>'+
+    '<div><b>Manufacturing / production date decoded from VIN</b></div>'+
+    '<div class="vin-detail">Character 4: <b>'+esc(monthCode)+'</b> → '+month+
+    ' &nbsp;•&nbsp; Characters 5–6: <b>'+esc(productionYearCode)+'</b> → '+productionYear+'</div>'+
+    extra+
+    '<div class="age-card '+ageClass+'">'+
+      '<div class="age-main">Approx. vehicle age at delivery: '+ageText+'</div>'+
+      '<div class="age-detail">'+deliveryText+'</div>'+
+      '<div class="age-detail">'+ageNote+'</div>'+
+      '<div class="age-input">'+
+        '<label for="deliveryDate">Delivery date</label>'+
+        '<input id="deliveryDate" type="date" value="'+
+          (deliveryInput && deliveryInput.value ? deliveryInput.value : new Date().toISOString().slice(0,10))+
+          '" onchange="decodeVIN()">'+
+      '</div>'+
+    '</div>'+
+    '<div class="vin-grid">'+
+      '<div class="vin-char"><b>4</b><span>'+esc(vin[3])+' • month</span></div>'+
+      '<div class="vin-char"><b>5–6</b><span>'+esc(productionYearCode)+' • year</span></div>'+
+      '<div class="vin-char"><b>10</b><span>'+esc(modelYearCode)+' • model year</span></div>'+
+      '<div class="vin-char"><b>VIN</b><span>17 chars ✓</span></div>'+
+    '</div>';
+
+  localStorage.setItem('virtusPDI_vin',vin);
+}
+
+function loadVIN(){
+  const saved=localStorage.getItem('virtusPDI_vin');
+  if(saved){
+    const el=document.getElementById('vinInput');
+    if(el){el.value=saved;decodeVIN();}
+  }
+}
+
+function scrollToNextIncomplete(){
+  const items=[...document.querySelectorAll('.item')];
+  const next=items.find(it=>!(state[it.dataset.k]||{}).status);
+  if(next){
+    next.scrollIntoView({behavior:'smooth',block:'center'});
+    next.style.outline='3px solid #9db8e8';
+    setTimeout(()=>next.style.outline='',1400);
+  } else {
+    document.getElementById('verdict').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+
+function update(){
+  const items = [...document.querySelectorAll('.item')];
+  const total = items.length;
+  let done=0, pass=0, fail=0, critical=0;
+
+  items.forEach(it => {
+    const v = state[it.dataset.k] || {};
+    if(v.status){
+      done++;
+      if(v.status==='pass') pass++;
+      if(v.status==='fail'){
+        fail++;
+        const label = it.querySelector('.label').textContent;
+        if(label.includes('CRITICAL')) critical++;
+      }
+    }
+  });
+
+  document.getElementById('total').textContent = total;
+  document.getElementById('done').textContent = done;
+  document.getElementById('passed').textContent = pass;
+  document.getElementById('failed').textContent = fail;
+  document.getElementById('critical').textContent = critical;
+  document.getElementById('bar').style.width = (total ? done/total*100 : 0) + '%';
+  const mp=document.getElementById('mobileProgress'); if(mp) mp.textContent=Math.round(total ? done/total*100 : 0)+'%';
+
+  const verdict = document.getElementById('verdict');
+  const detail = document.getElementById('verdictDetail');
+
+  if(!done){
+    verdict.textContent='PDI not yet started';
+    verdict.className='verdict';
+    detail.textContent='Start with Section 01 and work sequentially.';
+  } else if(critical > 0){
+    verdict.textContent='🔴 HOLD — critical issue(s) found';
+    verdict.className='verdict hold';
+    detail.textContent=`${critical} critical fail(s). Resolve and document them before accepting the car.`;
+  } else if(fail > 0){
+    verdict.textContent='🟡 REVIEW — unresolved issue(s) found';
+    verdict.className='verdict hold';
+    detail.textContent=`${fail} fail(s). Review every failed checkpoint and obtain a written resolution where needed.`;
+  } else if(done < total){
+    verdict.textContent='🟡 INCOMPLETE — inspection still in progress';
+    verdict.className='verdict';
+    detail.textContent=`${done} of ${total} checkpoints completed.`;
+  } else {
+    verdict.textContent='🟢 ALL CHECKPOINTS PASSED';
+    verdict.className='verdict ok';
+    detail.textContent='All 524 checkpoints are marked PASS.';
+  }
+
+  // Section completion counters
+  document.querySelectorAll('.section').forEach(sec => {
+    const its=[...sec.querySelectorAll('.item')];
+    const d=its.filter(it=>(state[it.dataset.k]||{}).status).length;
+    sec.querySelector('.count').textContent = `${d}/${its.length} checked`;
+  });
+}
+
+function expandAll(){
+  document.querySelectorAll('.section .body').forEach(b=>b.style.display='block');
+  document.querySelectorAll('.section-head .section-actions button').forEach(b=>b.textContent='Collapse');
+  document.querySelectorAll('.section-head .chev').forEach(c=>c.textContent='⌃');
+}
+function collapseAll(){
+  document.querySelectorAll('.section .body').forEach(b=>b.style.display='none');
+  document.querySelectorAll('.section-head .section-actions button').forEach(b=>b.textContent='Expand');
+  document.querySelectorAll('.section-head .chev').forEach(c=>c.textContent='⌄');
+}
+function setAll(status){
+  keys.forEach(k=>{ if(!(state[k]&&state[k].status)) state[k]={status}; });
+  save(); render();
+}
+function resetAll(){
+  if(confirm('Reset every checkpoint and delete this inspection from this browser?')){
+    localStorage.removeItem(STORAGE_KEY); location.reload();
+  }
+}
+function exportCSV(){
+  const rows=[['Section','Checkpoint','Status','Severity','Evidence','Notes','Fail detail']];
+  let idx=0;
+  sections.forEach(s=>s[1].forEach(label=>{
+    const k='i'+(idx++);
+    const v=state[k]||{};
+    rows.push([s[0],label,v.status||'',sev[label]||'NORMAL',v.evidence||'',v.notes||'',v.faildetail||'']);
+  }));
+  const csv=rows.map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='Volkswagen_Virtus_GT_Line_2026_AT_PDI.csv';
+  a.click();
+}
+render();
+loadVIN();
+</script>
+</body>
+</html>
